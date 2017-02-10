@@ -1,0 +1,103 @@
+﻿create sequence seq_pipeline;
+CREATE TABLE pipeline (
+    id integer primary key,
+    name character varying(512),
+    description character varying(512)
+);
+
+create sequence seq_action;
+create TABLE action(
+    id integer primary key,
+    name character varying(512)
+);
+
+create sequence seq_status;
+CREATE TABLE status(
+    id integer primary key,
+    name character varying(512)
+);
+
+create sequence seq_task;
+CREATE TABLE task (
+    id integer primary key,
+    name character varying(512),
+    description character varying(512),
+    action_id integer references action(id),
+    pipeline_id integer references pipeline(id),
+    status_id integer references status(id),
+    start_time timestamp without time zone,
+    end_time timestamp without time zone
+);
+
+create sequence seq_exe;
+CREATE TABLE execution(
+    id integer primary key,
+    status_id integer references status(id),
+    pipeline_id integer references pipeline(id),
+    start_time timestamp without time zone,
+    end_time timestamp without time zone
+);
+
+create sequence seq_pipeline;
+CREATE TABLE pipeline (
+    id integer primary key,
+    name character varying(512),
+    description character varying(512)
+);
+
+create sequence seq_action;
+create TABLE action(
+    id integer primary key,
+    name character varying(512)
+);
+
+create sequence seq_status;
+CREATE TABLE status(
+    id integer primary key,
+    name character varying(512)
+);
+
+create sequence seq_task;
+CREATE TABLE task (
+    id integer primary key,
+    name character varying(512),
+    description character varying(512),
+    action_id integer references action(id),
+    pipeline_id integer references pipeline(id),
+    status_id integer references status(id),
+    start_time timestamp without time zone,
+    end_time timestamp without time zone
+);
+
+create sequence seq_exe;
+CREATE TABLE execution(
+    id integer primary key,
+    status_id integer references status(id),
+    pipeline_id integer references pipeline(id),
+    start_time timestamp without time zone,
+    end_time timestamp without time zone
+);
+
+insert into status (id, name) VALUES (1, 'PENDING');
+insert into status (id, name) VALUES (2, 'IN PROGRESS');
+insert into status (id, name) VALUES (3, 'SKIPPED');
+insert into status (id, name) VALUES (4, 'FAILED');
+insert into status (id, name) VALUES (5, 'COMPLETED');
+
+insert into action (id, name) VALUES (1, 'Print');
+insert into action (id, name) VALUES (2, 'Random');
+insert into action (id, name) VALUES (3, 'Completed');
+insert into action (id, name) VALUES (4, 'Delayed');
+
+insert into pipeline (id, name, description) VALUES (1, 'Sample pipeline', 'This is tutorial pipeline');
+
+insert into task (id, name, description, action_id, pipeline_id) VALUES (1, 'Build', 'Build sources',  1, 1);
+insert into task (id, name, description, action_id, pipeline_id) VALUES (2, 'Test', 'Test compiled code',  2, 1);
+insert into task (id, name, description, action_id, pipeline_id) VALUES (3, 'Integration Test', 'Integration Testing',  1, 1);
+insert into task (id, name, description, action_id, pipeline_id) VALUES (4, 'Docs', 'Generate docs',  1, 1);
+insert into task (id, name, description, action_id, pipeline_id) VALUES (5, 'Publish', 'Publish artifacts',  2, 1);
+insert into task (id, name, description, action_id, pipeline_id) VALUES (6, 'Sync', 'Wait for completion',  1, 1);
+
+
+
+
