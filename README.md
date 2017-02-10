@@ -1,3 +1,3 @@
 # PipelineTest
 
-Database configuration in DatabaseQuery file.
+Database configuration in src/DatabaseQuery file.
